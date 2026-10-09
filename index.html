@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101827" />
+  <title>QR Studio — QR Code Generator</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="QR Studio home"><span class="brand-mark">▦</span> QR Studio</a>
+    <span class="top-note"><span class="live-dot"></span> Private · Runs in your browser</span>
+  </header>
+
+  <main class="page">
+    <section class="intro">
+      <p class="eyebrow">SIMPLE. CUSTOM. YOURS.</p>
+      <h1>Your link, <span>one scan away.</span></h1>
+      <p class="subtitle">Create a QR code in seconds. Customize it, preview it live, and download it when you're ready.</p>
+    </section>
+
+    <section class="workspace">
+      <div class="panel editor">
+        <div class="panel-heading">
+          <div><p class="step">STEP 01</p><h2>What should it open?</h2></div>
+        </div>
+
+        <label for="qrType">QR code type</label>
+        <select id="qrType">
+          <option value="url">Website URL</option>
+          <option value="text">Plain text</option>
+          <option value="email">Email</option>
+          <option value="phone">Phone number</option>
+          <option value="wifi">Wi-Fi network</option>
+        </select>
+
+        <div id="fields" class="fields"></div>
+        <p id="error" class="error" role="alert" aria-live="polite"></p>
+
+        <div class="section-line"></div>
+        <div class="panel-heading small-heading">
+          <div><p class="step">STEP 02</p><h2>Make it yours</h2></div>
+        </div>
+
+        <label>Quick presets</label>
+        <div class="presets">
+          <button class="preset active" data-preset="classic" type="button"><span class="preset-swatch classic-swatch"></span>Classic</button>
+          <button class="preset" data-preset="ocean" type="button"><span class="preset-swatch ocean-swatch"></span>Ocean</button>
+          <button class="preset" data-preset="berry" type="button"><span class="preset-swatch berry-swatch"></span>Berry</button>
+        </div>
+
+        <div class="two-col">
+          <div>
+            <label for="foreground">QR color</label>
+            <div class="color-control"><input id="foreground" type="color" value="#111827" /><span id="fgText">#111827</span></div>
+          </div>
+          <div>
+            <label for="background">Background</label>
+            <div class="color-control"><input id="background" type="color" value="#ffffff" /><span id="bgText">#FFFFFF</span></div>
+          </div>
+        </div>
+
+        <div class="range-head"><label for="size">QR size</label><span id="sizeValue">240 px</span></div>
+        <input id="size" type="range" min="160" max="320" step="20" value="240" />
+
+        <div class="range-head"><label for="margin">Quiet-zone margin</label><span id="marginValue">16 px</span></div>
+        <input id="margin" type="range" min="0" max="32" step="4" value="16" />
+
+        <label for="correction">Error correction</label>
+        <select id="correction">
+          <option value="L">Low (7%) — smallest code</option>
+          <option value="M">Medium (15%)</option>
+          <option value="Q">Quartile (25%)</option>
+          <option value="H" selected>High (30%) — more robust</option>
+        </select>
+        <p class="hint">Tip: keep strong contrast between the QR color and background for easier scanning.</p>
+      </div>
+
+      <aside class="panel preview-panel">
+        <div class="preview-top"><div><p class="step">LIVE PREVIEW</p><h2>Your QR code</h2></div><span class="preview-badge">● Live</span></div>
+        <div class="qr-stage">
+          <div id="qrOutput" class="qr-output" aria-label="QR code preview"></div>
+          <div id="placeholder" class="placeholder"><div class="placeholder-icon">▦</div><p>Your QR code will appear here</p></div>
+        </div>
+        <p id="scanNote" class="scan-note">Ready to scan when your content is valid.</p>
+        <button id="download" class="download-btn" type="button" disabled>↓ &nbsp; Download PNG</button>
+        <p class="download-note">High-quality PNG · Your settings are included</p>
+
+        <div class="recent">
+          <div class="recent-head"><h3>Recent QR codes</h3><button id="clearRecent" type="button" class="text-button">Clear</button></div>
+          <div id="recentList" class="recent-list"><p class="empty-recent">Your recent codes will appear here.</p></div>
+        </div>
+      </aside>
+    </section>
+    <footer><span>QR Studio</span><span>Made for quick, simple sharing.</span></footer>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
